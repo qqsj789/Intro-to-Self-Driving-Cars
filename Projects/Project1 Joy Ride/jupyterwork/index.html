@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>P0-1 | Drag Race</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.0/userinfo.min.js"></script>
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance;
+      UserInfo.getInfo(function(data) {
+          if (data && data.country && data.country.code === 'CN') {
+             gameInstance = UnityLoader.instantiate("gameContainer", "Build/P0_PARALLEL_PARK-CN.json", {onProgress: UnityProgress});
+           } else {
+             gameInstance = UnityLoader.instantiate("gameContainer", "Build/P0_PARALLEL_PARK.json", {onProgress: UnityProgress});
+          }
+      });
+      function myFunction() {
+        x = "hi";
+        gameInstance.SendMessage ('UISystem', 'PortText', x);
+        console.log('Should be calling a function in Unity')
+      }
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">P0-1 | Drag Race</div>
+      </div>
+    </div>
+    <script src="./receiver.js"></script>
+  </body>
+</html>
